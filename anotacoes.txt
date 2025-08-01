@@ -1,0 +1,10 @@
+Adicionando navegações no Angular
+
+Criando rotas para a aplicação.
+-> Primeiro é necessário importar os componentes para dentro de app.routes.
+e utilizar o componente RouterOutlat que é o roteador da aplicação, ou seja,
+onde este componente estiver é onde as páginas vão aparecer.
+
+_________________________________________________________________
+
+
