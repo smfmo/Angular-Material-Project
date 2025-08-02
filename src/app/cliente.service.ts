@@ -17,12 +17,16 @@ e é possível ser injetado em qualquer local da aplicação.
 })
 export class ClienteService {
 
-  constructor(private storage: StorageService) { }
+  public constructor(private storageService: StorageService) { }
 
-  salvarCliente(cliente: Cliente) {
-    const storage = this.storage.obterStorage();
+  public salvarCliente(cliente: Cliente): void {
+    const storage = this.storageService.obterStorage();
     storage.push(cliente);
 
     localStorage.setItem(StorageService.REPO_CLIENTES, JSON.stringify(storage));
+  }
+
+  public pesquisarCliente(nome: String): Cliente[] {
+    return this.storageService.obterStorage();
   }
 }

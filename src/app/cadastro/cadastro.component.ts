@@ -25,11 +25,11 @@ import { ClienteService } from '../cliente.service';
 })
 export class CadastroComponent {
 
-  cliente: Cliente = Cliente.newCliente();
+  public cliente: Cliente = Cliente.newCliente();
   
-  constructor(private service: ClienteService) { }
+  public constructor(private service: ClienteService) { }
 
-  salvarCliente() {
+  public salvarCliente(): void {
     this.service.salvarCliente(this.cliente);
   }
 }

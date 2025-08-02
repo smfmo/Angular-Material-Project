@@ -7,7 +7,7 @@ export class Cliente {
     dataNascimento?: string;
     email?: string;
 
-    static newCliente(){ 
+    public static newCliente(): Cliente { 
         const cliente = new Cliente();
         cliente.id = uuid();
         return cliente;

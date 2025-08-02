@@ -6,11 +6,11 @@ import { Cliente } from './cadastro/cliente';
 })
 export class StorageService {
 
-  static REPO_CLIENTES = "_CLIENTES";
+  public static REPO_CLIENTES = "_CLIENTES";
 
-  constructor() { }
+  public constructor() { }
 
-  obterStorage() : Cliente[] {
+  public obterStorage(): Cliente[] {
     const repositorioClientesSalvos = localStorage.getItem(StorageService.REPO_CLIENTES);
 
     if(repositorioClientesSalvos) {
