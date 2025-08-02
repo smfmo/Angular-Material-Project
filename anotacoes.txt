@@ -13,5 +13,22 @@ Implementando bibliotecas para melhorar o design e ajudar do desenvolvimento
 -> @angular/flex-layout 
 -> uuid
 
+_________________________________________________________________
+LocalStorage e SessionStorage:
+- São dois mecanismos de armazenamento no lado do cliente (navegador),
+que permite armazenar dados como pares de chave-valor. Ambos fazem parte 
+da API WebStorage.
+
+-> LocalStorage: 
+1- Os dados persistem mesmo após o navegador ser fechado ou reaberto
+2- Acessível em todas as abas/janelas do mesmo domínio
+3- geralmente 5MB por domínio 
+4- os dados permanecem até serem explicitamente removidos
+
+-> SessionStorage:
+1- Os dados são mantidos apenas durante a sessão da aba/janela
+2- Acessível apenas na Aba/janela onde foi criado 
+3- geralmente 5MB por domínio
+4- os dados são removidos quando a aba/janela é fechada
 
 
