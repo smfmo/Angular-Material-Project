@@ -26,7 +26,7 @@ export class ClienteService {
     localStorage.setItem(StorageService.REPO_CLIENTES, JSON.stringify(storage));
   }
 
-  public pesquisarCliente(nome: String): Cliente[] {
+  public pesquisarCliente(): Cliente[] {
     return this.storageService.obterStorage();
   }
 }
