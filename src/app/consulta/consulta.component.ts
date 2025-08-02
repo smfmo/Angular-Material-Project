@@ -34,12 +34,17 @@ específico do ciclo de vida do componente.
 })
 export class ConsultaComponent implements OnInit {
 
+  public nomeBusca: string = '';
   public listaClientes: Cliente[] = [];
   public colunasTabela: string[] = ["id", "nome", "email", "cpf", "dataNascimento"];
 
   public constructor(private clienteService: ClienteService) { }
 
   public ngOnInit(): void {
-    this.listaClientes = this.clienteService.pesquisarCliente();
+    this.listaClientes = this.clienteService.buscarClientes();
+  }
+
+  public pesquisarPorNome(): void {
+    this.listaClientes = this.clienteService.pesquisarCliente(this.nomeBusca);
   }
 }
