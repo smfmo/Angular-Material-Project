@@ -32,6 +32,4 @@ export class CadastroComponent {
   salvarCliente() {
     this.service.salvarCliente(this.cliente);
   }
-
-
 }

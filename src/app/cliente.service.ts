@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Cliente } from './cadastro/cliente';
+import { StorageService } from './storage.service';
 /*
 Decorator -> @Injectable({})
 O angular contém um container de injeção de dependências, ou seja,
@@ -16,26 +17,12 @@ e é possível ser injetado em qualquer local da aplicação.
 })
 export class ClienteService {
 
-  static REPO_CLIENTES = "_CLIENTES";
-
-  constructor() { }
-
-  obterStorage() : Cliente[] {
-    const repositorioClientes = localStorage.getItem(ClienteService.REPO_CLIENTES);
-
-    if(repositorioClientes) {
-      const clientes: Cliente[] = JSON.parse(repositorioClientes);
-      return clientes;
-    }
-
-    const clientes: Cliente[] = [];
-    localStorage.setItem(ClienteService.REPO_CLIENTES, JSON.stringify(clientes));
-
-    return clientes;
-  }
+  constructor(private storage: StorageService) { }
 
   salvarCliente(cliente: Cliente) {
-    console.log(cliente);
-  }
+    const storage = this.storage.obterStorage();
+    storage.push(cliente);
 
+    localStorage.setItem(StorageService.REPO_CLIENTES, JSON.stringify(storage));
+  }
 }
