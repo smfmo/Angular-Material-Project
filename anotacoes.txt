@@ -52,6 +52,41 @@ _________________________________________________________________
 
 Utilizando Snack-bar do Angular Material
 
+_________________________________________________________________
+
+-> (iniciando) Integração com API (Importante!!!)
+
+1- Configurar a aplicação para que consiga fazer requisições para uma API.
+
+- No app.config.ts:
+
+. importar o Http Client(Cliente http).
+import { provideHttpClient, withFetch } from '@angular/common/http';
+
+-> provideHttpClient:
+Função que fornece o HttpClient para a aplicação Angular. Substitui a maneira mais antiga de importar 
+o HttpClientModule (em aplicações mais novas que usam standalone components).
+
+Características:
+É a forma moderna (a partir do Angular v15+) de configurar o HttpClient
+
+Usada principalmente em aplicações que utilizam standalone components
+
+Fornece todos os serviços necessários para fazer requisições HTTP
+
+Pode ser combinada com "features" como withFetch para configuração adicional
+
+-> withFetch:
+Esta é uma função que configura o HttpClient para usar a API Fetch em vez do XMLHttpRequest padrão.
+
+Características:
+Substitui o mecanismo padrão de requisições HTTP do Angular (XHR) pelo Fetch API
+
+Pode melhorar o desempenho em alguns cenários
+
+Oferece um comportamento mais moderno e consistente com as APIs web atuais
+
+É opcional - você só precisa usá-lo se quiser especificamente o Fetch em vez do XHR
 
 
 

@@ -69,7 +69,6 @@ export class ConsultaComponent implements OnInit {
 
   public pesquisarPorNome(): void {
     this.listaClientes = this.service.pesquisarClientePeloNome(this.nomeBusca);
-    this.mostrarMensagem("Cliente Encontrado!");
   }
 
   public preparaEditar(id: string): void {
