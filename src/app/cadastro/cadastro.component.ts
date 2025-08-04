@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FlexLayoutModule }from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
@@ -7,10 +8,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material/select';
 import { Cliente } from './cliente';
 import { ClienteService } from '../cliente.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { BrasilapiService } from '../brasilapi.service';
+import { Estado, Municipio } from '../brasilapi.model';
 
 /*
 -> ActivatedRoute -> Aqui esta injetando os dados da rota que foi
@@ -29,6 +33,8 @@ os dados da rota que foi acessada.
     MatInputModule,
     MatIconModule,
     MatButtonModule,
+    MatSelectModule,
+    CommonModule,
     NgxMaskDirective
 ],
   providers: [
@@ -42,17 +48,16 @@ export class CadastroComponent implements OnInit {
   public cliente: Cliente = Cliente.newCliente();
   public atualizando: boolean = false;
   private snack: MatSnackBar = inject(MatSnackBar);
+  public estados: Estado[] = [];
+  public municipios: Municipio[] = [];
   
   public constructor(
     private service: ClienteService,
+    private brasilapiService: BrasilapiService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
-
-  public mostrarMensagem(mensagem: string): void {
-    this.snack.open(mensagem, "Ok");
-  }
-
+  
   public salvarCliente(): void {
     if(!this.atualizando) {
       this.service.salvarCliente(this.cliente);
@@ -68,6 +73,17 @@ export class CadastroComponent implements OnInit {
   public atualizarCliente(): void {
     this.service.atualizarCliente(this.cliente);
   }
+
+  public carregarUfs(): void {
+    this.brasilapiService.listarUfs().subscribe({
+      next: listaEstados => this.estados = listaEstados,
+      error: erro => console.log("ocorreu um erro inesperado:", erro)
+    });
+  }
+ 
+  public mostrarMensagem(mensagem: string): void {
+    this.snack.open(mensagem, "Ok");
+  }
  
   public ngOnInit(): void {
     this.route.queryParamMap.subscribe( (query: any) => {
@@ -81,5 +97,7 @@ export class CadastroComponent implements OnInit {
         }
       }
     });
+
+    this.carregarUfs();
   }
 }

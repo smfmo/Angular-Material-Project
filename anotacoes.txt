@@ -87,6 +87,38 @@ Pode melhorar o desempenho em alguns cenários
 Oferece um comportamento mais moderno e consistente com as APIs web atuais
 
 É opcional - você só precisa usá-lo se quiser especificamente o Fetch em vez do XHR
+_________________________________________________________________
+
+-> Observable: 
+Utilizado quando se trabalha com requisições Http.
+Representa um fluxo de dados que pode emitir valores ao longo do tempo. 
+É como uma "fonte de dados" que pode notificar os "Assinantes" quando novos 
+valores estão disponíveis.
+Porque utilizar Observable e Subscriber?
+  Porque toda requisição http é assíncrona,
+  Então uma requisição pode demorar bastante, e então pra não congestionar
+  a aplicação é utilizado o Observable, que executa a requisição e deixa
+  rolando e parte pra próxima linha. E quando recebe o resultado, chama o 
+  subscriber pra notificar que a requisição obteve uma resposta.
+_________________________________________
+1- Requisições HTTP são assíncronas
+
+Quando você faz uma chamada HTTP (como uma API REST), a resposta não é imediata.
+
+Se o código ficasse bloqueado esperando a resposta, a aplicação travaria (especialmente em interfaces de usuário, como Angular/Ionic).
+
+2- Observable lida com operações assíncronas
+
+O Observable (do RxJS) é um padrão que permite trabalhar com streams de dados assíncronos.
+
+Quando você faz uma requisição HTTP, ele não bloqueia a thread principal, permitindo que o código continue executando outras tarefas.
+
+3- Subscriber lida com a resposta (ou erro)
+
+O Subscriber (ou Observer) é quem recebe o resultado quando a requisição é concluída (seja sucesso ou erro).
+
+Ele é acionado apenas quando há uma resposta, evitando que o programa fique esperando indefinidamente.
+
 
 
 
