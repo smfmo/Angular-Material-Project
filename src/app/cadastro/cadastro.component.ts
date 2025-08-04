@@ -31,5 +31,6 @@ export class CadastroComponent {
 
   public salvarCliente(): void {
     this.service.salvarCliente(this.cliente);
+    this.cliente = Cliente.newCliente();
   }
 }

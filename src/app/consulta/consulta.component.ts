@@ -1,3 +1,4 @@
+import { routes } from './../app.routes';
 import { Component, isStandalone, OnInit } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
@@ -9,12 +10,26 @@ import { MatButtonModule } from '@angular/material/button';
 import { ClienteService }from '../cliente.service';
 import { Cliente } from '../cadastro/cliente';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 /*
 OnInit -> Interface que faz parte do ciclo de vida dos componentes.
-Implementa um método chamado ngOnInit(). Quando um componente implementa esta 
-interface, ele deve conter esse método, que será executado em um momento 
-específico do ciclo de vida do componente.
+  Implementa um método chamado ngOnInit(). Quando um componente implementa esta 
+  interface, ele deve conter esse método, que será executado em um momento 
+  específico do ciclo de vida do componente.
+___________
+
+-> Navegar de uma página para outra, passando parâmetros.
+Sempre que for necessário fazer navegação dentro dos componentes, injetar
+o Router: 
+  Contexto: Quando o usuário clicar no botão de "Editar" vai acionar 
+  o método "preparaEditar" e vai executar o algoritmo do método:
+  this.router.navigate(['/cadastro'], {queryParams: {"id": id}});
+  aonde o método "navigate" do router recebe dois parâmetros,
+  um array onde é passado o nome da rota para onde ele deve ir 
+  e o segundo são os parâmetros que devem ser passados de página 
+  para página.
+___________
 */
 
 @Component({
@@ -36,9 +51,12 @@ export class ConsultaComponent implements OnInit {
 
   public nomeBusca: string = '';
   public listaClientes: Cliente[] = [];
-  public colunasTabela: string[] = ["id", "nome", "email", "cpf", "dataNascimento"];
+  public colunasTabela: string[] = ["id", "nome", "email", "cpf", "dataNascimento", "acoes"];
 
-  public constructor(private clienteService: ClienteService) { }
+  public constructor(
+    private clienteService: ClienteService,
+    private router: Router
+  ) { }
 
   public ngOnInit(): void {
     this.listaClientes = this.clienteService.buscarClientes();
@@ -46,5 +64,9 @@ export class ConsultaComponent implements OnInit {
 
   public pesquisarPorNome(): void {
     this.listaClientes = this.clienteService.pesquisarCliente(this.nomeBusca);
+  }
+
+  public preparaEditar(id: string): void {
+    this.router.navigate([ '/cadastro' ], {queryParams: { "id": id }});
   }
 }
