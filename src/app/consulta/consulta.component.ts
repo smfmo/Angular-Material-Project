@@ -1,5 +1,4 @@
-import { routes } from './../app.routes';
-import { Component, isStandalone, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -8,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { ClienteService }from '../cliente.service';
+import { MatSnackBar } from '@angular/material/snack-bar'
 import { Cliente } from '../cadastro/cliente';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -52,11 +52,16 @@ export class ConsultaComponent implements OnInit {
   public nomeBusca: string = '';
   public listaClientes: Cliente[] = [];
   public colunasTabela: string[] = ["id", "nome", "email", "cpf", "dataNascimento", "acoes"];
+  private snack: MatSnackBar = inject(MatSnackBar);
   
   public constructor(
     private service: ClienteService,
     private router: Router
   ) { }
+
+  public mostrarMensagem(mensagem: string): void {
+    this.snack.open(mensagem, "Ok");
+  }
 
   public ngOnInit(): void {
     this.listaClientes = this.service.buscarTodosClientes();
@@ -64,6 +69,7 @@ export class ConsultaComponent implements OnInit {
 
   public pesquisarPorNome(): void {
     this.listaClientes = this.service.pesquisarClientePeloNome(this.nomeBusca);
+    this.mostrarMensagem("Cliente Encontrado!");
   }
 
   public preparaEditar(id: string): void {
@@ -77,5 +83,6 @@ export class ConsultaComponent implements OnInit {
   public deletar(cliente: Cliente): void {
     this.service.deletarCliente(cliente);
     this.listaClientes = this.service.buscarTodosClientes();
+    this.mostrarMensagem("Cliente excluído com sucesso!");
   }
 }

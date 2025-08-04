@@ -46,6 +46,12 @@ Esta é uma função que fornece os provedores necessários para configurar o ng
 providers: [
     provideNgxMask()
   ],
+_________________________________________________________________
+
+-> Mensagens de Feedback na aplicação.
+
+Utilizando Snack-bar do Angular Material
+
 
 
 
