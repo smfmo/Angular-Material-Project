@@ -38,11 +38,27 @@ export class ClienteService {
     localStorage.setItem(StorageService.REPO_CLIENTES, JSON.stringify(storage));
   }
 
-  public buscarClientes(): Cliente[] {
+  public deletarCliente(cliente: Cliente): void {
+    const storage = this.storageService.obterStorage();
+
+    const newList = storage.filter(c => c.id !== cliente.id);
+
+    /*
+    Outra abordagem de exclusão utilizando IndexOf();
+
+    const indexItem = storage.indexOf(cliente);
+    if(indexItem > -1){
+      storage.splice(indexItem, 1)
+    }*/ 
+   
+    localStorage.setItem(StorageService.REPO_CLIENTES, JSON.stringify(newList));
+  }
+
+  public buscarTodosClientes(): Cliente[] {
     return this.storageService.obterStorage();
   }
 
-  public pesquisarCliente(nomeBusca: string): Cliente[] {
+  public pesquisarClientePeloNome(nomeBusca: string): Cliente[] {
     const clientes = this.storageService.obterStorage();
 
     return clientes.filter(cliente => cliente.nome?.indexOf(nomeBusca) !== -1);

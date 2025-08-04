@@ -52,21 +52,32 @@ export class ConsultaComponent implements OnInit {
   public nomeBusca: string = '';
   public listaClientes: Cliente[] = [];
   public colunasTabela: string[] = ["id", "nome", "email", "cpf", "dataNascimento", "acoes"];
+  public deletando: boolean = false;
 
   public constructor(
-    private clienteService: ClienteService,
+    private service: ClienteService,
     private router: Router
   ) { }
 
   public ngOnInit(): void {
-    this.listaClientes = this.clienteService.buscarClientes();
+    this.listaClientes = this.service.buscarTodosClientes();
   }
 
   public pesquisarPorNome(): void {
-    this.listaClientes = this.clienteService.pesquisarCliente(this.nomeBusca);
+    this.listaClientes = this.service.pesquisarClientePeloNome(this.nomeBusca);
   }
 
   public preparaEditar(id: string): void {
     this.router.navigate([ '/cadastro' ], {queryParams: { "id": id }});
+  }
+
+  public preparaDeletar(): void {
+    this.deletando = true;
+  }
+
+  public deletar(cliente: Cliente): void {
+    this.service.deletarCliente(cliente);
+    this.listaClientes = this.service.buscarTodosClientes();
+    this.deletando = false;
   }
 }
