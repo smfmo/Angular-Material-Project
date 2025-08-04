@@ -16,7 +16,7 @@ e é possível ser injetado em qualquer local da aplicação.
   providedIn: 'root'
 })
 export class ClienteService {
-
+  
   public constructor(private storageService: StorageService) { }
 
   public salvarCliente(cliente: Cliente): void {
@@ -34,5 +34,10 @@ export class ClienteService {
     const clientes = this.storageService.obterStorage();
 
     return clientes.filter(cliente => cliente.nome?.indexOf(nomeBusca) !== -1);
+  }
+
+  public buscarClientePorId(id: string): Cliente | undefined{
+    const clientes = this.storageService.obterStorage();
+    return clientes.find(cliente => cliente.id === id);
   }
 }
