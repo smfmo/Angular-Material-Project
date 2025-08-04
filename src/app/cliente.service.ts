@@ -20,9 +20,21 @@ export class ClienteService {
   public constructor(private storageService: StorageService) { }
 
   public salvarCliente(cliente: Cliente): void {
+    
     const storage = this.storageService.obterStorage();
     storage.push(cliente);
 
+    localStorage.setItem(StorageService.REPO_CLIENTES, JSON.stringify(storage));
+  }
+
+  public atualizarCliente(cliente: Cliente): void {
+
+    const storage = this.storageService.obterStorage();
+    storage.forEach(c => {
+      if(c.id === cliente.id) {
+        Object.assign(c, cliente);
+      }
+    });
     localStorage.setItem(StorageService.REPO_CLIENTES, JSON.stringify(storage));
   }
 

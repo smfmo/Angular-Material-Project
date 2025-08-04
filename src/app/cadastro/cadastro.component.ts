@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { Cliente } from './cliente';
 import { ClienteService } from '../cliente.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 /*
 
 -> ActivatedRoute -> Aqui esta injetando os dados da rota que foi
@@ -37,9 +37,24 @@ export class CadastroComponent implements OnInit {
   
   public constructor(
     private service: ClienteService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
+  public salvarCliente(): void {
+    if(!this.atualizando) {
+      this.service.salvarCliente(this.cliente);
+      this.cliente = Cliente.newCliente();
+    } else {
+      this.atualizarCliente();
+      this.router.navigate([ '/consulta' ]);
+    }
+  }
+
+  public atualizarCliente(): void {
+    this.service.atualizarCliente(this.cliente);
+  }
+ 
   public ngOnInit(): void {
     this.route.queryParamMap.subscribe( (query: any) => {
       const params = query[ 'params' ];
@@ -52,10 +67,5 @@ export class CadastroComponent implements OnInit {
         }
       }
     });
-  }
-
-  public salvarCliente(): void {
-    this.service.salvarCliente(this.cliente);
-    this.cliente = Cliente.newCliente();
   }
 }
