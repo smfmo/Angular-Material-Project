@@ -30,5 +30,24 @@ da API WebStorage.
 2- Acessível apenas na Aba/janela onde foi criado 
 3- geralmente 5MB por domínio
 4- os dados são removidos quando a aba/janela é fechada
+_________________________________________________________________
+
+-> Máscaras para os campos.
+adicionar a biblioteca: ngx-mask.
+
+1. Importar no componente a ser utilizado:
+- import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+
+NgxMaskDirective:
+Diretiva principal do pacote que é aplicado aos elementos de input para habilitar máscaras.
+
+provideNgxMask:
+Esta é uma função que fornece os provedores necessários para configurar o ngx-mask na aplicação Angular.
+providers: [
+    provideNgxMask()
+  ],
+
+
+
 
 

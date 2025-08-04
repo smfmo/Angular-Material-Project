@@ -9,13 +9,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { Cliente } from './cliente';
 import { ClienteService } from '../cliente.service';
 import { ActivatedRoute, Router } from '@angular/router';
-/*
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
+/*
 -> ActivatedRoute -> Aqui esta injetando os dados da rota que foi
 ativada. 
 O router serve para navegar e o ActivatedRoute serve para capturar 
 os dados da rota que foi acessada.
 */
+
 @Component({
   selector: 'app-cadastro',
   imports: [
@@ -25,8 +27,12 @@ os dados da rota que foi acessada.
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    NgxMaskDirective
 ],
+  providers: [
+    provideNgxMask()
+  ],
   templateUrl: './cadastro.component.html',
   styleUrl: './cadastro.component.scss'
 })
