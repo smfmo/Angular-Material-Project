@@ -8,7 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatSelectModule } from '@angular/material/select';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { Cliente } from './cliente';
 import { ClienteService } from '../cliente.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -78,6 +78,14 @@ export class CadastroComponent implements OnInit {
     this.brasilapiService.listarUfs().subscribe({
       next: listaEstados => this.estados = listaEstados,
       error: erro => console.log("ocorreu um erro inesperado:", erro)
+    });
+  }
+
+  public carregarMunicipios(event: MatSelectChange): void {
+    const ufSelecionada = event.value;
+    this.brasilapiService.listarMunicipios(ufSelecionada).subscribe({
+      next: listaMunicipios => this.municipios = listaMunicipios,
+      error: erro => console.log("Ocorreu um erro inesperado:", erro)
     });
   }
  
