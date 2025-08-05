@@ -1,4 +1,5 @@
 import { v4 as uuid } from 'uuid';
+import { Endereco } from '../endereco.model';
 
 export class Cliente {
     id?: string;
@@ -9,7 +10,7 @@ export class Cliente {
     deletando: boolean = false;
     uf?: string;
     municipio?: string;
-
+    
     public static newCliente(): Cliente { 
         const cliente = new Cliente();
         cliente.id = uuid();

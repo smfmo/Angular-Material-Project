@@ -10,10 +10,8 @@
                         <div fxLayout="column" fxFlex="800px">
                             <mat-form-field class="full-width">
                                 <mat-label>Nome: *</mat-label>
-                                <input type="text" 
-                                        name="nome" 
-                                        [(ngModel)]="cliente.nome" 
-                                        placeholder="Ex: Jose da Silva" matInput/>
+                                <input type="text" name="nome" [(ngModel)]="cliente.nome"
+                                    placeholder="Ex: Jose da Silva" matInput />
                             </mat-form-field>
                         </div>
                     </div>
@@ -21,9 +19,7 @@
                         <div fxLayout="column" fxFlex="800px">
                             <mat-form-field class="full-width">
                                 <mat-label>Email: *</mat-label>
-                                <input type="text" 
-                                    name="email" 
-                                    [(ngModel)]="cliente.email" 
+                                <input type="text" name="email" [(ngModel)]="cliente.email"
                                     placeholder="Digite seu email" matInput />
                             </mat-form-field>
                         </div>
@@ -32,10 +28,7 @@
                         <div fxLayout="column" fxFlex="400px">
                             <mat-form-field class="full-width">
                                 <mat-label>CPF: *</mat-label>
-                                <input type="text"
-                                    name="cpf" 
-                                    mask="000.000.000-00"
-                                    [(ngModel)]="cliente.cpf" 
+                                <input type="text" name="cpf" mask="000.000.000-00" [(ngModel)]="cliente.cpf"
                                     placeholder="Digite seu CPF" matInput />
                             </mat-form-field>
                         </div>
@@ -44,11 +37,9 @@
                         <div fxLayout="column" fxFlex="400px">
                             <mat-form-field class="full-width">
                                 <mat-label>Data de Nascimento: *</mat-label>
-                                <input type="text" 
-                                    name="dataNascimento"
-                                    mask="00/00/0000"
-                                    [(ngModel)]="cliente.dataNascimento" 
-                                    placeholder="Digite sua Data de Nascimento" matInput />
+                                <input type="text" name="dataNascimento" mask="00/00/0000"
+                                    [(ngModel)]="cliente.dataNascimento" placeholder="Digite sua Data de Nascimento"
+                                    matInput />
                             </mat-form-field>
                         </div>
                     </div>
@@ -76,18 +67,75 @@
                             </mat-form-field>
                         </div>
                     </div>
+                        
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="16px">
+                        <div fxLayout="column" fxFlex="400px">
+                            <mat-form-field class="full-width">
+                                <mat-label>CEP: *</mat-label>
+                                <input type="text" mask="00000-000" name="cep" [(ngModel)]="cep"
+                                placeholder="Digite seu Cep" matInput />
+                            </mat-form-field>
+                        </div>
+                        <button type="button"  mat-flat-button color="primary" class="ml-5" (click)="buscarCep()">
+                            <mat-icon fontIcon="search"></mat-icon>
+                            buscar Cep
+                        </button>
+                    </div>
+                    
+                    @if (cep) {
+                        <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="16px">
+                        <div fxLayout="column" fxFlex="400px">
+                            <mat-form-field class="full-width">
+                                <mat-label>Logradouro: *</mat-label>
+                                <input type="text" name="logradouro" [(ngModel)]="endereco.logradouro "
+                                placeholder="logradouro" matInput />
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="16px">
+                        <div fxLayout="column" fxFlex="400px">
+                            <mat-form-field class="full-width">
+                                <mat-label>bairro: *</mat-label>
+                                <input type="text" name="bairro" [(ngModel)]="endereco.bairro"
+                                placeholder="bairro" matInput />
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="16px">
+                        <div fxLayout="column" fxFlex="400px">
+                            <mat-form-field class="full-width">
+                                <mat-label>Região: *</mat-label>
+                                <input type="text" name="regiao" [(ngModel)]="endereco.regiao"
+                                placeholder="região" matInput />
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div fxLayout="row" fxLayoutAlign="start" fxLayoutGap="16px">
+                        <div fxLayout="column" fxFlex="400px">
+                            <mat-form-field class="full-width" >
+                                <mat-label>estado: *</mat-label>
+                                <input type="text" name="estado" [(ngModel)]="endereco.estado"
+                                placeholder="estado" matInput />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    }
+
                 </mat-card-content>
                 <mat-card-actions>
                     @if (!atualizando) {
-                        <button type="submit" mat-flat-button color="primary" class="ml-5">
-                            <mat-icon fontIcon="save"></mat-icon>
-                            Salvar
-                        </button>
+                    <button type="submit" mat-flat-button color="primary" class="ml-5">
+                        <mat-icon fontIcon="save"></mat-icon>
+                        Salvar
+                    </button>
                     } @else {
-                        <button mat-flat-button color="primary" class="ml-5">
-                            <mat-icon fontIcon="refresh"></mat-icon>
-                            Atualizar
-                        </button>
+                    <button mat-flat-button color="primary" class="ml-5">
+                        <mat-icon fontIcon="refresh"></mat-icon>
+                        Atualizar
+                    </button>
                     }
                     <button mat-flat-button color="accent" class="ml-5">
                         <mat-icon fontIcon="backspace"></mat-icon>

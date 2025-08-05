@@ -1,5 +1,5 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FlexLayoutModule }from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
@@ -14,7 +14,10 @@ import { ClienteService } from '../cliente.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { BrasilapiService } from '../brasilapi.service';
+import { ViacepApiService } from './../viacep-api.service';
 import { Estado, Municipio } from '../brasilapi.model';
+import { Endereco } from '../endereco.model';
+
 
 /*
 -> ActivatedRoute -> Aqui esta injetando os dados da rota que foi
@@ -50,10 +53,13 @@ export class CadastroComponent implements OnInit {
   private snack: MatSnackBar = inject(MatSnackBar);
   public estados: Estado[] = [];
   public municipios: Municipio[] = [];
+  public endereco: Endereco = new Object;
+  public cep: string = '';
   
   public constructor(
     private service: ClienteService,
     private brasilapiService: BrasilapiService,
+    private viacepApiService: ViacepApiService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
@@ -86,6 +92,15 @@ export class CadastroComponent implements OnInit {
     this.brasilapiService.listarMunicipios(ufSelecionada).subscribe({
       next: listaMunicipios => this.municipios = listaMunicipios,
       error: erro => console.log("Ocorreu um erro inesperado:", erro)
+    });
+  }
+
+  public buscarCep(): void {
+    this.viacepApiService.buscarCep(this.cep).subscribe({
+      next: (enderecoLocalizado) => {
+        this.endereco = enderecoLocalizado;
+      },
+      error: erro => console.log("Ocorreu um erro inesperado", erro)
     });
   }
  
